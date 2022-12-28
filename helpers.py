@@ -1,7 +1,7 @@
 from json import dump, load
+from hexbytes import HexBytes
 from qrcode import QRCode
 from eth_account import Account
-from hexbytes import HexBytes
 
 class SafeSigner:
     def __init__(self, private_key: str):
@@ -17,9 +17,7 @@ class SafeSigner:
         safe_tx_hash = safe_tx_hash[2:] if safe_tx_hash[:2] == "0x" else safe_tx_hash
         signature = HexBytes(self.sign(HexBytes(safe_tx_hash))).hex()
         print("Signature: \n", signature, "\n")
-        qr = QRCode()
-        qr.add_data(signature)
-        qr.print_ascii()
+        QRCode().add_data(signature).print_ascii()
 
 class KeystoreHelper:
     def __init__(self, keystore_path):
