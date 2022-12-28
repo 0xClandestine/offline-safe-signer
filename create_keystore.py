@@ -1,5 +1,5 @@
 from os import system
-from helpers import SafeSigner, KeystoreHelper
+from helpers import KeystoreHelper
 
 # Parse private key from user
 private_key = input("Enter private key: ")
