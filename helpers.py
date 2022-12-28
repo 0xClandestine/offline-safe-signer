@@ -17,7 +17,9 @@ class SafeSigner:
         safe_tx_hash = safe_tx_hash[2:] if safe_tx_hash[:2] == "0x" else safe_tx_hash
         signature = HexBytes(self.sign(HexBytes(safe_tx_hash))).hex()
         print("Signature: \n", signature, "\n")
-        QRCode().add_data(signature).print_ascii()
+        qr = QRCode()
+        qr.add_data(signature)
+        qr.print_ascii()
 
 class KeystoreHelper:
     def __init__(self, keystore_path):
