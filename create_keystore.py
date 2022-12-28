@@ -1,5 +1,5 @@
 from os import system, name
-from helpers import KeystoreHelper
+from signer import Keystore
 
 # Parse private key from user
 private_key = input("Enter private key: ")
@@ -14,7 +14,7 @@ keystore_password = input("Enter keystore password: ")
 system("cls" if name == "nt" else "clear")
 
 # Generate keystore for private key using user input
-KeystoreHelper(keystore_path).encrypt(private_key, keystore_password)
+Keystore(keystore_path).encrypt(private_key, keystore_password)
 
 # Tell user where file was saved
 print("Keystore has been saved at ", keystore_path)
