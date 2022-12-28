@@ -1,7 +1,10 @@
+# External dependencies
+from eth_account import Account
+
+# Native dependencies
 from json import dump, load
 from hexbytes import HexBytes
-from qrcode import QRCode
-from eth_account import Account
+import subprocess
 
 """
 The SafeSigner class allows signing Ethereum transactions and printing their signatures as QR codes.
@@ -38,13 +41,10 @@ class SafeSigner:
 
     def sign_and_print_qr(self, safe_tx_hash: str):
         """
-        Signs an Ethereum transaction hash, prints the signature as a QR code, and returns the signature.
+        Signs an Ethereum transaction hash, and prints the signature as a QR code.
 
         Parameters:
         safe_tx_hash (str): The transaction hash to sign.
-
-        Returns:
-        str: The signature of the transaction hash.
         """
         # If the transaction hash is prefixed with "0x", remove the prefix
         safe_tx_hash = safe_tx_hash[2:] if safe_tx_hash[:2] == "0x" else safe_tx_hash
@@ -52,12 +52,8 @@ class SafeSigner:
         signature = HexBytes(self.sign(HexBytes(safe_tx_hash))).hex()
         # Print the signature
         print("Signature: \n", signature, "\n")
-        # Initialize a QR code object
-        qr = QRCode()
-        # Add the signature to the QR code
-        qr.add_data(signature)
-        # Print the QR code as ASCII art
-        qr.print_ascii()
+        # Use python3-qrcode (built into tails) to create and display qr code
+        subprocess.call("qr {0}".format(signature), shell=True)
 
 class KeystoreHelper:
     def __init__(self, keystore_path):

@@ -17,4 +17,4 @@ system("cls" if name == "nt" else "clear")
 KeystoreHelper(keystore_path).encrypt(private_key, keystore_password)
 
 # Tell user where file was saved
-print("Keystore has been saved at {}", keystore_path)
+print("Keystore has been saved at ", keystore_path)
