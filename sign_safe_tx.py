@@ -1,4 +1,4 @@
-from os import system
+from os import system, name
 from helpers import SafeSigner, KeystoreHelper
 
 # Parse safe tx hash from user
@@ -10,8 +10,8 @@ keystore_path = input("Enter keystore path: ")
 # Parse keystore password from user
 keystore_password = input("Enter keystore password: ")
 
-# Clear user input before generating QR code, use 'cls' for windows
-system('clear')
+# Clear user input before generating QR code
+system("cls" if name == "nt" else "clear")
 
 # Parse private key using user input
 private_key = KeystoreHelper(keystore_path).decrypt(keystore_password)
