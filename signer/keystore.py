@@ -40,14 +40,3 @@ class Keystore:
         private_key = Account.decrypt(keystore, password)
         # Return the decrypted private key as a hexadecimal string
         return private_key.hex()
-
-    def generate_private_key():
-        """Generate a new random private key.
-
-        Returns:
-            The private key, as a hexadecimal string.
-        """
-        # Create a new Account object with a randomly generated private key
-        private_key = Account.create().privateKey
-        # Return the private key as a hexadecimal string
-        return private_key.hex()
